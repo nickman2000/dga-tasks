@@ -1,0 +1,13 @@
+<section>
+  <h2>{{ today | date: 'MMMM yyyy' }}</h2>
+  <div class="calendar">
+    @for (weekday of weekdays; track weekday) {
+      <div class="weekday"> {{ weekday }}</div>
+    }
+    @for (monthDay of daysInMonth; track monthDay) {
+      <div class="day"
+           [ngStyle]="{'background-color': (monthDay.day === day && monthDay.month === today.getMonth()) ? 'red' : isSunday(monthDay) || isSaturday(monthDay) ? 'green' : 'white' }"> {{ monthDay.day }}
+      </div>
+    }
+  </div>
+</section>

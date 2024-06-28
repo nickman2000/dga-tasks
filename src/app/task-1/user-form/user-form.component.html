@@ -1,0 +1,74 @@
+<button mat-flat-button color="primary" (click)="addCompanyFormArray()">Add Job</button>
+<form [formGroup]="form">
+  <ng-container formArrayName="companies">
+    @for (companyForm of companies.controls; track companyForm) {
+      <button type="button" (click)="removeJob($index)" mat-flat-button color="warn">Remove Job</button>
+      <div [formGroupName]="$index">
+        <app-custom-input formControlName="name"
+                          [required]="true"
+                          [error]="!!companyForm.get('name')?.hasError('required') && !!companyForm.get('name')?.touched"
+                          [placeholder]="'Company Name'"></app-custom-input>
+        <app-custom-input [required]="true" formControlName="webPage"
+                          [placeholder]="'Company Webpage'"></app-custom-input>
+        <mat-form-field>
+              <textarea matNativeControl cdkTextareaAutosize="5" cols="10" rows="5"
+                        formControlName="description"></textarea>
+          <mat-error>Required</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="button" (click)="addPosition($index)">Add Position</button>
+        <ng-container formArrayName="positions">
+          @for (positionForm of getPositionArray($index).controls; track positionForm; let index = $index) {
+            <div [formGroupName]="index">
+              <button (click)="removePosition(index)" mat-flat-button color="warn">Remove Position</button>
+              <app-custom-input [required]="true" formControlName="positionName"
+                                [placeholder]="'Position Name'"></app-custom-input>
+              <mat-form-field>
+                <mat-label>Position Level</mat-label>
+                <mat-select formControlName="positionLevel">
+                  @for (level of levels; track level) {
+                    <mat-option [value]="level">{{ level }}</mat-option>
+                  }
+                </mat-select>
+                <mat-error>Required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+              <textarea matNativeControl cdkTextareaAutosize="5" cols="10" rows="5"
+                        formControlName="positionDescription"></textarea>
+                <mat-error>Required</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>From</mat-label>
+                <input matInput [matDatepicker]="picker"
+                       formControlName="positionDateFrom">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                @if (positionForm.get('positionDateFrom')?.hasError('required')) {
+                  <mat-error>Required</mat-error>
+                }
+                @if (positionForm.get('positionDateFrom')?.hasError('invalidDate')) {
+                  <mat-error>Invalid Date</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>To</mat-label>
+                <input matInput [matDatepicker]="picker2"
+                       formControlName="positionDateTo">
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                @if (positionForm.get('positionDateTo')?.hasError('required')) {
+                  <mat-error>Required</mat-error>
+                }
+                @if (positionForm.get('positionDateTo')?.hasError('invalidDate')) {
+                  <mat-error>Invalid Date</mat-error>
+                }
+              </mat-form-field>
+            </div>
+          }
+        </ng-container>
+      </div>
+    }
+  </ng-container>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!companies.length" (click)="submitForm()">Submit
+  </button>
+</form>

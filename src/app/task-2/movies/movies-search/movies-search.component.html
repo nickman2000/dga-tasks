@@ -1,0 +1,6 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Movie" [(ngModel)]="title" name="title">
+  </mat-form-field>
+  <button mat-flat-button (click)="movieTitle.emit(title)">Search</button>
+</form>

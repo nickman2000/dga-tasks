@@ -1,0 +1,13 @@
+<section class="movies-list">
+  @for (movie of $moviesList(); track movie.id) {
+    @defer {
+      <div class="movie-card">
+        <p class="title" [title]="movie.title">{{ movie.title | titlecase }}</p>
+        <img [src]="movie.image.url" [alt]="movie.image.id">
+        @if (movie.year) {
+          <p class="year">{{ movie.year }}</p>
+        }
+      </div>
+    }
+  }
+</section>

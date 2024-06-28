@@ -1,0 +1,11 @@
+<form>
+  <mat-form-field appearance="fill">
+    <input type="text" matInput [(ngModel)]="stringText" name="string">
+  </mat-form-field>
+</form>
+<button mat-flat-button color="warn" (click)="calculate()">Calculate</button>
+<app-string-percentage-calculator
+  #calculatorComponent
+  [stringText]="stringText"
+  [stringArray]="stringArray"
+></app-string-percentage-calculator>

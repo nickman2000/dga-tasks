@@ -1,0 +1,7 @@
+<mat-form-field appearance="fill">
+  <input type="text" #input (change)="valueChange(input.value)" [required]="required" matInput [(ngModel)]="value"
+         [placeholder]="placeholder()">
+  @if (required) {
+    <mat-error>Required</mat-error>
+  }
+</mat-form-field>

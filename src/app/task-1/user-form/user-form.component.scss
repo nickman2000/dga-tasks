@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  margin: 40px auto;
+  max-width: 600px;
+
+  button {
+    margin: 24px;
+  }
+
+  form div {
+    display: grid;
+    gap: 24px;
+  }
+}

@@ -1,0 +1,39 @@
+section {
+  text-align: center;
+  padding-block: 20px;
+  max-width: 800px;
+  margin-inline: auto;
+
+  h2 {
+    border: 2px solid black;
+    margin-bottom: 0;
+    padding-block: 12px;
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .weekday {
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      padding: 8px 12px;
+
+      &:first-of-type {
+        border-left: 2px solid black;
+      }
+    }
+
+    .day {
+      border: 2px solid black;
+      padding: 24px 16px;
+      text-align: center;
+      border-top: none;
+      border-left: none;
+
+      &:nth-of-type(7n + 1) {
+        border-left: 2px solid black;
+      }
+    }
+  }
+}
